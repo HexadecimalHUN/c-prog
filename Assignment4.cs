@@ -1,62 +1,105 @@
 using System;
+using System.Dynamic;
 
-namespace ConsoleApplication1
+namespace ConsoleApp4
 {
-
-    public class BooleanCourse : Project
+    class Program
     {
-        public static long Grade1 = -2;
-        public static long Grade2 = -2;
-        public static long Grade3 = -2;
-        public static long Grade4 = -2;
-
-        private static bool PassedBool1 {get; set; } = false;
-        private static bool PassedBool2 {get; set; } = false;
-        private static bool PassedBool3 { get; set; } = false;
-        private static bool PassedBool4 { get; set; } = false;
-        
-        static void calc(bool[] args)
+        public class BooleanCourse1 : Project
         {
-            if (Grade1 >= 2)
+            static bool Bool1PassedGrade { get; set; } = true;
+            public static bool Bool1Passed { get; set; } = false;
+            public static void PassedBool1(string[] args)
             {
+                if (Bool1PassedGrade == true)
+                {
+                    Bool1Passed = true;
+                    
+                }
+            }
+            
+        }
+        public class BooleanCourse2 : Project
+        {
+            static bool Bool2PassedGrade { get; set; } = true;
+            public static bool Bool2Passed { get; set; } = false;
+            public static void PassedBool2(string[] args)
+            {
+                if (Bool2PassedGrade == true)
+                {
+                    Bool2Passed = true;
+                }
+            }
 
-                PassedBool1 = true;
-                return;
-            }
-            else
-            {
-                PassedBool1 = false;
-                return;
-            }
+        }
 
-            if (Grade2 >= 2)
+        public class GradedCourse1 : Project
+        {
+            static int Course1Grade { get; set; } = 3;
+            public static bool Graded1Passed { get; set; } = false;
+            public static void PassedGraded1(string[] args)
             {
-                PassedBool2 = true;
-            }
-            else
-            {
-                PassedBool2 = false;
+                if (Course1Grade >= 2)
+                {
+                    Graded1Passed = true;
+                }
             }
         }
-    }
+        public class GradedCourse2 : Project
+        {
+            static int Course2Grade { get; set; } = 3;
+            public static bool Graded2Passed { get; set; } = false;
+            public static void PassedGraded2(string[] args)
+            {
+                if (Course2Grade >= 2)
+                {
+                    Graded2Passed = true;
+                }
+            }
+        }
 
-    public class BooleanCourse1 : BooleanCourse
-    {
-        
-    }
-    public class BooleanCourse2 : BooleanCourse
-    {
-        public bool passedBoll2 = false;
-    }
+        public class Project {
 
-    public class GradedCourse : Project
-    {
-        public bool PassedGrade = false;
-    }
+            static void Main(string[] args)
+                
+            {
+                int Passed1 = 0;
+                int Passed2 = 0;
+                int Passed3 = 0;
+                int Passed4 = 0;
+                GradedCourse1.PassedGraded1(args);
+                if (GradedCourse1.Graded1Passed == true)
+                {
+                    Passed1 = 1;
+                }
+                GradedCourse2.PassedGraded2(args);
+                if (GradedCourse2.Graded2Passed == true)
+                {
+                    Passed2 = 1;
+                }
+                BooleanCourse1.PassedBool1(args);
+                if (BooleanCourse1.Bool1Passed == true)
+                {
+                    Passed3 = 1;
+                }
+                BooleanCourse2.PassedBool2(args);
+                if (BooleanCourse2.Bool2Passed == true)
+                {
+                    Passed4 = 1;
+                }
 
-    
-    public class Project
-    {
-        
+                if (Passed1 + Passed2 + Passed3 + Passed4 >= 3) 
+                {
+                    Console.WriteLine("You had passed at least 3 out from the 4 groups");
+                    Console.Read();
+                }
+                else
+                {
+                    Console.WriteLine("You haven't passed eniough courses");
+                    Console.Read();
+                }
+            }
+        }
+
     }
 }
