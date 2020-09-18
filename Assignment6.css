@@ -6,57 +6,57 @@ using System.Threading.Tasks;
 namespace Application1
 {
     public class program
+    
     {
+        private static readonly object WriteoutLock = new object();
+        
         static void Task1()
         {
-            Thread.Sleep(100);
-            Console.WriteLine(Thread.CurrentThread.ManagedThreadId);
+
+            Thread.Sleep(400);
+
+            {
+                for (int j = 0; j <= 4; j++)
+                {
+                    lock (WriteoutLock)
+                    {
+                        if (j < 4)
+                        {
+                            Console.WriteLine(j);
+                        }
+
+                        if (j == 4)
+                        {
+                            return;
+                        }
+                    }
+                    
+                }
+            }
+
             
-        }/*
-        static void Task2()
-        {
-            Thread.Sleep(100);
-            Console.WriteLine(Thread.CurrentThread.ManagedThreadId);
+
+
         }
-        static void Task3()
-        {
-            Thread.Sleep(100);
-            Console.WriteLine(Thread.CurrentThread.ManagedThreadId);
-            
-        }
-        static void Task4()
-        {
-            Thread.Sleep(100);
-            Console.WriteLine(Thread.CurrentThread.ManagedThreadId);
-        }*/
+        
 
         static void Main(string[] argv)
         {
             for (int i = 0; i < 4; i++)
             {
-                Thread t1 = new Thread(new ThreadStart(Task1));
-                t1.Start();
-                Thread.Sleep(200);
-                t1.Abort();
+
+
+                new Thread(Task1).Start();
+                Thread.Sleep(2000);
                 
                 
-                
-               /* Thread t2 = new Thread(new ThreadStart(Task2));
-                t2.Start();
-                Thread.Sleep(200);
-                t2.Abort();
-                
-                
-                Thread t3 = new Thread(new ThreadStart(Task3));
-                t3.Start();
-                Thread.Sleep(200);
-                t3.Abort();
-                
-                Thread t4 = new Thread(new ThreadStart(Task4));
-                t4.Start();
-                Thread.Sleep(200);
-                t4.Abort();*/
+
+
             }
+
+
+            
+
         }
     }
     
